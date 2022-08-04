@@ -15,14 +15,14 @@ class TabbarController: UITabBarController {
         $0.tabBarItem = UITabBarItem(title: "투데이", image: UIImage(systemName: "mail"), tag: 0)
     }
     
-    private lazy var appViewVC = UIViewController().then{
+    private lazy var appViewVC = AppViewVC().then{
         $0.tabBarItem = UITabBarItem(title: "앱", image: UIImage(systemName: "square.stack.3d.up"), tag: 1)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.viewControllers = [self.todayVC, self.appViewVC]
+        let appViewNavigationVC = UINavigationController(rootViewController: self.appViewVC)
+        self.viewControllers = [self.todayVC, appViewNavigationVC]
     }
 }
 

@@ -16,8 +16,12 @@
 		D422681F289A738700A9AE6D /* Then in Frameworks */ = {isa = PBXBuildFile; productRef = D422681E289A738700A9AE6D /* Then */; };
 		D4226822289A739700A9AE6D /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = D4226821289A739700A9AE6D /* SnapKit */; };
 		D4226828289A771D00A9AE6D /* TodayVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4226827289A771D00A9AE6D /* TodayVC.swift */; };
-		D422682A289A784800A9AE6D /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4226829289A784800A9AE6D /* HeaderView.swift */; };
+		D422682A289A784800A9AE6D /* HeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4226829289A784800A9AE6D /* HeaderCell.swift */; };
 		D422682C289A7AC300A9AE6D /* TodayCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D422682B289A7AC300A9AE6D /* TodayCell.swift */; };
+		D4D7C4AA289BC3110006C32D /* AppViewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D7C4A9289BC3110006C32D /* AppViewVC.swift */; };
+		D4D7C4AD289BC5250006C32D /* LargeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D7C4AC289BC5250006C32D /* LargeCell.swift */; };
+		D4D7C4AF289BD49B0006C32D /* ListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D7C4AE289BD49B0006C32D /* ListCell.swift */; };
+		D4D7C4B1289BD7100006C32D /* AppHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4D7C4B0289BD7100006C32D /* AppHeaderCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -29,8 +33,12 @@
 		D4226812289A724D00A9AE6D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D4226814289A724E00A9AE6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D4226827289A771D00A9AE6D /* TodayVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayVC.swift; sourceTree = "<group>"; };
-		D4226829289A784800A9AE6D /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
+		D4226829289A784800A9AE6D /* HeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderCell.swift; sourceTree = "<group>"; };
 		D422682B289A7AC300A9AE6D /* TodayCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCell.swift; sourceTree = "<group>"; };
+		D4D7C4A9289BC3110006C32D /* AppViewVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewVC.swift; sourceTree = "<group>"; };
+		D4D7C4AC289BC5250006C32D /* LargeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LargeCell.swift; sourceTree = "<group>"; };
+		D4D7C4AE289BD49B0006C32D /* ListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListCell.swift; sourceTree = "<group>"; };
+		D4D7C4B0289BD7100006C32D /* AppHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppHeaderCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -79,6 +87,7 @@
 		D4226823289A76B300A9AE6D /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				D4D7C4AB289BC3170006C32D /* App */,
 				D4226826289A76FF00A9AE6D /* Today */,
 				D422680A289A724B00A9AE6D /* TabbarController.swift */,
 			);
@@ -90,9 +99,20 @@
 			children = (
 				D4226827289A771D00A9AE6D /* TodayVC.swift */,
 				D422682B289A7AC300A9AE6D /* TodayCell.swift */,
-				D4226829289A784800A9AE6D /* HeaderView.swift */,
+				D4226829289A784800A9AE6D /* HeaderCell.swift */,
 			);
 			path = Today;
+			sourceTree = "<group>";
+		};
+		D4D7C4AB289BC3170006C32D /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D4D7C4A9289BC3110006C32D /* AppViewVC.swift */,
+				D4D7C4B0289BD7100006C32D /* AppHeaderCell.swift */,
+				D4D7C4AE289BD49B0006C32D /* ListCell.swift */,
+				D4D7C4AC289BC5250006C32D /* LargeCell.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -145,9 +165,9 @@
 			);
 			mainGroup = D42267FA289A724B00A9AE6D;
 			packageReferences = (
-				D422681A289A737800A9AE6D /* XCRemoteSwiftPackageReference "Kingfisher.git" */,
+				D422681A289A737800A9AE6D /* XCRemoteSwiftPackageReference "Kingfisher" */,
 				D422681D289A738700A9AE6D /* XCRemoteSwiftPackageReference "Then" */,
-				D4226820289A739700A9AE6D /* XCRemoteSwiftPackageReference "SnapKit.git" */,
+				D4226820289A739700A9AE6D /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = D4226804289A724B00A9AE6D /* Products */;
 			projectDirPath = "";
@@ -178,8 +198,12 @@
 				D422680B289A724B00A9AE6D /* TabbarController.swift in Sources */,
 				D4226807289A724B00A9AE6D /* AppDelegate.swift in Sources */,
 				D4226828289A771D00A9AE6D /* TodayVC.swift in Sources */,
-				D422682A289A784800A9AE6D /* HeaderView.swift in Sources */,
+				D422682A289A784800A9AE6D /* HeaderCell.swift in Sources */,
 				D4226809289A724B00A9AE6D /* SceneDelegate.swift in Sources */,
+				D4D7C4AD289BC5250006C32D /* LargeCell.swift in Sources */,
+				D4D7C4B1289BD7100006C32D /* AppHeaderCell.swift in Sources */,
+				D4D7C4AF289BD49B0006C32D /* ListCell.swift in Sources */,
+				D4D7C4AA289BC3110006C32D /* AppViewVC.swift in Sources */,
 				D422682C289A7AC300A9AE6D /* TodayCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -392,7 +416,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		D422681A289A737800A9AE6D /* XCRemoteSwiftPackageReference "Kingfisher.git" */ = {
+		D422681A289A737800A9AE6D /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
 			requirement = {
@@ -408,7 +432,7 @@
 				kind = branch;
 			};
 		};
-		D4226820289A739700A9AE6D /* XCRemoteSwiftPackageReference "SnapKit.git" */ = {
+		D4226820289A739700A9AE6D /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit.git";
 			requirement = {
@@ -421,7 +445,7 @@
 /* Begin XCSwiftPackageProductDependency section */
 		D422681B289A737800A9AE6D /* Kingfisher */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D422681A289A737800A9AE6D /* XCRemoteSwiftPackageReference "Kingfisher.git" */;
+			package = D422681A289A737800A9AE6D /* XCRemoteSwiftPackageReference "Kingfisher" */;
 			productName = Kingfisher;
 		};
 		D422681E289A738700A9AE6D /* Then */ = {
@@ -431,7 +455,7 @@
 		};
 		D4226821289A739700A9AE6D /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = D4226820289A739700A9AE6D /* XCRemoteSwiftPackageReference "SnapKit.git" */;
+			package = D4226820289A739700A9AE6D /* XCRemoteSwiftPackageReference "SnapKit" */;
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */

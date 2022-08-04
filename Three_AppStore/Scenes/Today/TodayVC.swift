@@ -18,7 +18,7 @@ final class TodayVC : UIViewController{
         $0.delegate = self
         $0.dataSource = self
         $0.register(TodayCell.self, forCellWithReuseIdentifier: "TodayCell")
-        $0.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
+        $0.register(HeaderCell.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView")
     }
     
     override func viewDidLoad() {
@@ -26,8 +26,7 @@ final class TodayVC : UIViewController{
         
         self.view.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints{
-            $0.top.bottom.equalToSuperview()
-            $0.leading.trailing.equalToSuperview().inset(15)
+            $0.edges.equalToSuperview()
         }
         self.collectionView.collectionViewLayout = collectionViewLayout()
     }
@@ -42,8 +41,11 @@ final class TodayVC : UIViewController{
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 1)
         group.contentInsets = .init(top: 10, leading: 0, bottom: 10, trailing: 0)
+        
         let section = NSCollectionLayoutSection(group: group)
+        
         section.boundarySupplementaryItems = [header]
+        section.contentInsets = .init(top: 0, leading: 15, bottom: 0, trailing: 15)
         
         return UICollectionViewCompositionalLayout(section: section)
     }
@@ -64,11 +66,11 @@ extension TodayVC : UICollectionViewDelegate, UICollectionViewDataSource{
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if kind == UICollectionView.elementKindSectionHeader{
-            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView", for: indexPath) as? HeaderView else{ return UICollectionReusableView()}
+            guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "HeaderView", for: indexPath) as? HeaderCell else{ return UICollectionReusableView()}
             let now = Date()
             let formatter = DateFormatter()
             formatter.locale = Locale(identifier: "ko")
-            formatter.dateFormat = "MM월 dd일 e요일"
+            formatter.dateFormat = "MM월 dd일 E요일"
             
             header.date.text = formatter.string(from: now)
             header.titleLabel.text = "투데이"
