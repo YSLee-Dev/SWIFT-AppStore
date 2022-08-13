@@ -15,7 +15,7 @@ class LargeCell : UICollectionViewCell{
     let cellID = "LargeCell"
     
     var topTitle = UILabel().then{
-        $0.textColor = .blue
+        $0.textColor = UIColor.systemBlue
         $0.font = UIFont.boldSystemFont(ofSize: 13)
     }
     
@@ -51,7 +51,7 @@ class LargeCell : UICollectionViewCell{
             $0.top.equalTo(self.mainTitle.snp.bottom).offset(5)
         }
         self.imageView.snp.makeConstraints{
-            $0.width.equalToSuperview().inset(5)
+            $0.width.equalToSuperview()
             $0.height.equalTo(self.imageView.snp.width)
             $0.leading.equalToSuperview()
             $0.top.equalTo(self.subTitle.snp.bottom).offset(5)

@@ -20,7 +20,7 @@ class AppHeaderCell : UICollectionReusableView {
     
     var moreBtn = UIButton().then{
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 16)
-        $0.setTitleColor(.blue, for: .normal)
+        $0.setTitleColor(UIColor.systemBlue, for: .normal)
     }
     
     override func layoutSubviews() {

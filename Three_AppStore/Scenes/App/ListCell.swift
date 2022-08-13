@@ -28,8 +28,8 @@ class ListCell : UICollectionViewCell{
         $0.setTitle("받기", for: .normal)
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 15
-        $0.backgroundColor = .cyan
-        $0.setTitleColor(UIColor.blue, for: .normal)
+        $0.backgroundColor = .secondarySystemBackground
+        $0.setTitleColor(UIColor.systemBlue, for: .normal)
     }
     
     var icon = UIImageView().then{
@@ -52,7 +52,7 @@ class ListCell : UICollectionViewCell{
         
         self.appName.snp.makeConstraints{
             $0.bottom.equalTo(self.icon.snp.centerY).offset(-5)
-            $0.leading.equalTo(self.icon.snp.trailing).offset(5)
+            $0.leading.equalTo(self.icon.snp.trailing).offset(10)
         }
         
         self.subTitle.snp.makeConstraints{
@@ -61,9 +61,9 @@ class ListCell : UICollectionViewCell{
         }
         
         self.installBtn.snp.makeConstraints{
-            $0.trailing.equalToSuperview().offset(-5)
             $0.width.equalTo(50)
             $0.height.equalTo(30)
+            $0.trailing.equalTo(self.snp.trailing).offset(-5)
             $0.centerY.equalToSuperview()
         }
     }
