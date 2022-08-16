@@ -66,7 +66,7 @@ private extension AppViewVC{
         group.contentInsets = .init(top: 10, leading: 15, bottom: 10, trailing: 15)
         
         let section = NSCollectionLayoutSection(group: group)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .paging
         
         let border = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: borderSize, elementKind: "border", alignment: .bottom)
         section.boundarySupplementaryItems = [border]
@@ -82,8 +82,9 @@ private extension AppViewVC{
         
         let item = NSCollectionLayoutItem(layoutSize: itemSize)
         let group = NSCollectionLayoutGroup.vertical(layoutSize: groupSize, subitem: item, count: 3)
+        group.contentInsets = .init(top: 0, leading: 15, bottom: 0, trailing: 15)
         let hGroup = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: group, count: 1)
-        hGroup.contentInsets = .init(top: 0, leading: 15, bottom: 0, trailing: 15)
+        
         
         let hedaer = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: headerSize, elementKind: UICollectionView.elementKindSectionHeader, alignment: .top)
         hedaer.contentInsets = .init(top: 30, leading: 15, bottom: 0, trailing: 15)
@@ -91,7 +92,7 @@ private extension AppViewVC{
         let border = NSCollectionLayoutBoundarySupplementaryItem(layoutSize: borderSize, elementKind: "border", alignment: .bottom)
         
         let section = NSCollectionLayoutSection(group: hGroup)
-        section.orthogonalScrollingBehavior = .continuous
+        section.orthogonalScrollingBehavior = .paging
         section.boundarySupplementaryItems = [hedaer, border]
         section.contentInsets = .init(top: 40, leading: 0, bottom: 10, trailing: 0)
         

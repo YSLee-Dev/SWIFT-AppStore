@@ -79,4 +79,8 @@ extension TodayVC : UICollectionViewDelegate, UICollectionViewDataSource{
             return UICollectionReusableView()
         }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        self.present(DetailVC(), animated: true)
+    }
 }

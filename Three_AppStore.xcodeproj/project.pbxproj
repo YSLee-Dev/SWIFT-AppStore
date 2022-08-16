@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B68F65C128ABA28B00831937 /* DetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = B68F65C028ABA28B00831937 /* DetailVC.swift */; };
 		B6E2664528A767D600F3D14A /* SeparatorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E2664428A767D600F3D14A /* SeparatorCell.swift */; };
 		B6E2664728A76FD100F3D14A /* CodeBtnCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = B6E2664628A76FD100F3D14A /* CodeBtnCell.swift */; };
 		D4226807289A724B00A9AE6D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D4226806289A724B00A9AE6D /* AppDelegate.swift */; };
@@ -27,6 +28,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B68F65C028ABA28B00831937 /* DetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailVC.swift; sourceTree = "<group>"; };
 		B6E2664428A767D600F3D14A /* SeparatorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SeparatorCell.swift; sourceTree = "<group>"; };
 		B6E2664628A76FD100F3D14A /* CodeBtnCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodeBtnCell.swift; sourceTree = "<group>"; };
 		D4226803289A724B00A9AE6D /* Three_AppStore.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Three_AppStore.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -94,6 +96,7 @@
 				D4D7C4AB289BC3170006C32D /* App */,
 				D4226826289A76FF00A9AE6D /* Today */,
 				D422680A289A724B00A9AE6D /* TabbarController.swift */,
+				B68F65C028ABA28B00831937 /* DetailVC.swift */,
 			);
 			path = Scenes;
 			sourceTree = "<group>";
@@ -203,6 +206,7 @@
 			files = (
 				B6E2664528A767D600F3D14A /* SeparatorCell.swift in Sources */,
 				D422680B289A724B00A9AE6D /* TabbarController.swift in Sources */,
+				B68F65C128ABA28B00831937 /* DetailVC.swift in Sources */,
 				D4226807289A724B00A9AE6D /* AppDelegate.swift in Sources */,
 				B6E2664728A76FD100F3D14A /* CodeBtnCell.swift in Sources */,
 				D4226828289A771D00A9AE6D /* TodayVC.swift in Sources */,
