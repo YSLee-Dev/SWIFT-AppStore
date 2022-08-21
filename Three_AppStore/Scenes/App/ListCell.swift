@@ -32,6 +32,12 @@ class ListCell : UICollectionViewCell{
         $0.setTitleColor(UIColor.systemBlue, for: .normal)
     }
     
+    var inAppInfo = UILabel().then{
+        $0.text = "앱 내 구입"
+        $0.font = UIFont.systemFont(ofSize: 10)
+        $0.textColor = .secondaryLabel
+    }
+    
     var icon = UIImageView().then{
         $0.layer.masksToBounds = true
         $0.layer.cornerRadius = 10
@@ -39,7 +45,7 @@ class ListCell : UICollectionViewCell{
     
     
     override func layoutSubviews() {
-        [self.appName, self.subTitle, self.installBtn, self.icon].forEach{
+        [self.appName, self.subTitle, self.installBtn, self.inAppInfo,self.icon].forEach{
             self.addSubview($0)
         }
         
@@ -65,6 +71,11 @@ class ListCell : UICollectionViewCell{
             $0.height.equalTo(30)
             $0.trailing.equalTo(self.snp.trailing).offset(-5)
             $0.centerY.equalToSuperview()
+        }
+        
+        self.inAppInfo.snp.makeConstraints{
+            $0.top.equalTo(self.installBtn.snp.bottom).offset(5)
+            $0.centerX.equalTo(self.installBtn)
         }
     }
 }

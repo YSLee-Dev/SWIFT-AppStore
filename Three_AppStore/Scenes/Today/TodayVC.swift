@@ -9,8 +9,11 @@ import UIKit
 
 import Then
 import SnapKit
+import Kingfisher
 
 final class TodayVC : UIViewController{
+    
+    private var todayList : [Today] = []
     
     var layoutInit = UICollectionViewLayout()
     
@@ -23,12 +26,14 @@ final class TodayVC : UIViewController{
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.fetchData()
         
         self.view.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints{
             $0.edges.equalToSuperview()
         }
         self.collectionView.collectionViewLayout = collectionViewLayout()
+        
     }
     
     func collectionViewLayout() -> UICollectionViewLayout{
@@ -53,14 +58,19 @@ final class TodayVC : UIViewController{
 
 extension TodayVC : UICollectionViewDelegate, UICollectionViewDataSource{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        self.todayList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCell", for: indexPath) as? TodayCell else {return UICollectionViewCell()}
-        cell.mainTitle.text = "mainTitle"
-        cell.subTitle.text = "subTitle"
-        cell.footerTitle.text = "footerTitle"
+        cell.mainTitle.text = self.todayList[indexPath.row].title
+        cell.subTitle.text = self.todayList[indexPath.row].subTitle
+        cell.footerTitle.text = self.todayList[indexPath.row].description
+        
+        guard let imgUrl = URL(string: self.todayList[indexPath.row].imageURL) else {return UICollectionViewCell()}
+        
+        cell.imageView.kf.setImage(with: imgUrl)
+        
         return cell
     }
     
@@ -81,6 +91,21 @@ extension TodayVC : UICollectionViewDelegate, UICollectionViewDataSource{
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        self.present(DetailVC(), animated: true)
+        self.present(DetailVC(Today: self.todayList[indexPath.row]), animated: true)
+    }
+}
+
+
+private extension TodayVC {
+    func fetchData(){
+        guard let url = Bundle.main.url(forResource: "Today", withExtension: "plist") else {return}
+        
+        do{
+            let data = try Data(contentsOf: url)
+            let result = try PropertyListDecoder().decode([Today].self, from: data)
+            self.todayList = result
+        }catch{
+            print("FETCH DATA ERROR")
+        }
     }
 }

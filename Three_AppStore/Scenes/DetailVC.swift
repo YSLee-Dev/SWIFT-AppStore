@@ -9,26 +9,26 @@ import UIKit
 
 import Then
 import SnapKit
+import Kingfisher
 
 class DetailVC : UIViewController {
     
+    var today : Today
+    
     var appIcon = UIImageView().then{
         $0.layer.cornerRadius = 10
-        $0.contentMode = .scaleAspectFit
+        $0.contentMode = .scaleToFill
         $0.clipsToBounds = true
-        $0.backgroundColor = .systemBlue
     }
     
     var mainTitle = UILabel().then{
         $0.font = UIFont.boldSystemFont(ofSize: 20)
         $0.textColor = .label
-        $0.text = "mainTitle"
     }
     
     var subTitle = UILabel().then{
         $0.font = UIFont.systemFont(ofSize: 15)
         $0.textColor = .secondaryLabel
-        $0.text = "subTitle"
     }
     
     var downloadBtn = UIButton().then{
@@ -43,6 +43,15 @@ class DetailVC : UIViewController {
         $0.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         $0.tintColor = .systemBlue
         
+    }
+    
+    init(Today : Today){
+        self.today = Today
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -90,5 +99,11 @@ private extension DetailVC {
             $0.width.equalTo(32)
             $0.height.equalTo(32)
         }
+        
+        guard let imgUrl = URL(string: self.today.imageURL) else {return}
+        self.appIcon.kf.setImage(with: imgUrl)
+        self.mainTitle.text = self.today.title
+        self.subTitle.text = self.today.subTitle
+        
     }
 }

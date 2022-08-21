@@ -12,6 +12,9 @@ import SnapKit
 
 final class AppViewVC : UIViewController{
     
+    var featureList : [Feature] = []
+    var rankingFeatureList : [RankingFeature] = []
+    
     var layoutInit = UICollectionViewLayout()
     
     private lazy var collectionView = UICollectionView(frame: .zero, collectionViewLayout: layoutInit).then{
@@ -35,6 +38,9 @@ private extension AppViewVC{
         self.navigationItem.title = "앱"
         self.navigationItem.largeTitleDisplayMode = .always
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        
+        self.featureDataFetch()
+        self.rankingFeatureDataFetch()
         
         self.view.addSubview(self.collectionView)
         self.collectionView.snp.makeConstraints{
@@ -114,10 +120,12 @@ private extension AppViewVC{
 
 extension AppViewVC : UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if section == 0 || section == 1{
-            return 5
-        }else{
-            return 1
+        if section == 0 {
+            return self.featureList.count
+        }else if section == 1{
+            return self.rankingFeatureList.count
+        }else {
+            return 0
         }
     }
     
@@ -128,7 +136,7 @@ extension AppViewVC : UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         if indexPath.section == 1 && kind == UICollectionView.elementKindSectionHeader{
             guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "AppHeaderCell", for: indexPath) as? AppHeaderCell else {return UICollectionReusableView()}
-            header.mainTitle.text = "MAIN TITLE"
+            header.mainTitle.text = "iPhone이 처음이라면"
             header.moreBtn.setTitle("모두 보기", for: .normal)
             return header
         }else if kind == "border"{
@@ -141,17 +149,21 @@ extension AppViewVC : UICollectionViewDataSource, UICollectionViewDelegate{
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if indexPath.section == 0{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "LargeCell", for: indexPath) as? LargeCell else {return UICollectionViewCell()}
-            cell.topTitle.text = "TOP TITLE"
-            cell.subTitle.text = "SUB TITLE"
-            cell.mainTitle.text = "MAIN TITLE"
-            cell.imageView.backgroundColor = .blue
+            cell.topTitle.text = self.featureList[indexPath.row].type
+            cell.subTitle.text = self.featureList[indexPath.row].description
+            cell.mainTitle.text = self.featureList[indexPath.row].appName
+            
+            guard let url = URL(string: self.featureList[indexPath.row].imageURL) else {return UICollectionViewCell()}
+            
+            cell.imageView.kf.setImage(with: url)
             
             return cell
         }else if indexPath.section == 1{
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ListCell", for: indexPath) as? ListCell else {return UICollectionViewCell()}
-            cell.appName.text = "APP NAME"
-            cell.subTitle.text = "SUB TITLE"
-            cell.icon.backgroundColor = .gray
+            cell.appName.text = self.rankingFeatureList[indexPath.row].title
+            cell.subTitle.text = self.rankingFeatureList[indexPath.row].description
+            cell.inAppInfo.isHidden = !self.rankingFeatureList[indexPath.row].isInPurchaseApp
+            cell.icon.backgroundColor = .systemGray
             return cell
         }else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CodeBtnCell", for: indexPath) as? CodeBtnCell else {return UICollectionViewCell()}
@@ -159,4 +171,32 @@ extension AppViewVC : UICollectionViewDataSource, UICollectionViewDelegate{
         }
     }
     
+}
+
+private extension AppViewVC{
+    func featureDataFetch(){
+        guard let url = Bundle.main.url(forResource: "Feature", withExtension: "plist") else {return}
+        
+        do{
+            let data = try Data(contentsOf: url)
+            let result = try PropertyListDecoder().decode([Feature].self, from: data)
+            
+            self.featureList = result
+        }catch{
+            print("featureDataFetch ERROR")
+        }
+    }
+    
+    func rankingFeatureDataFetch(){
+        guard let url = Bundle.main.url(forResource: "RankingFeature", withExtension: "plist") else {return}
+        
+        do{
+            let data = try Data(contentsOf: url)
+            let result = try PropertyListDecoder().decode([RankingFeature].self, from: data)
+            
+            self.rankingFeatureList = result
+        }catch{
+            print("RankingFeatureDataFetch ERROR")
+        }
+    }
 }
