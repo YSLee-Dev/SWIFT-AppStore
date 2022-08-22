@@ -125,7 +125,7 @@ extension AppViewVC : UICollectionViewDataSource, UICollectionViewDelegate{
         }else if section == 1{
             return self.rankingFeatureList.count
         }else {
-            return 0
+            return 1
         }
     }
     
@@ -168,6 +168,14 @@ extension AppViewVC : UICollectionViewDataSource, UICollectionViewDelegate{
         }else {
             guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "CodeBtnCell", for: indexPath) as? CodeBtnCell else {return UICollectionViewCell()}
             return cell
+        }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        if indexPath.section == 0{
+            self.present(DetailVC(feature: self.featureList[indexPath.row]), animated: true)
+        }else if indexPath.section == 1{
+            self.present(DetailVC(rankingFeature: self.rankingFeatureList[indexPath.row]), animated: true)
         }
     }
     

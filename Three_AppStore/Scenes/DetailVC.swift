@@ -13,12 +13,15 @@ import Kingfisher
 
 class DetailVC : UIViewController {
     
-    var today : Today
+    var today : Today?
+    var feature : Feature?
+    var rankingFeature : RankingFeature?
     
     var appIcon = UIImageView().then{
         $0.layer.cornerRadius = 10
         $0.contentMode = .scaleToFill
         $0.clipsToBounds = true
+        $0.backgroundColor = .lightGray
     }
     
     var mainTitle = UILabel().then{
@@ -39,14 +42,24 @@ class DetailVC : UIViewController {
         $0.titleLabel?.font = UIFont.boldSystemFont(ofSize: 15)
     }
     
-    var shareBtn = UIButton().then{
+    lazy var shareBtn = UIButton().then{
         $0.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         $0.tintColor = .systemBlue
-        
+        $0.addTarget(self, action: #selector(shareBtnClick(_:)), for: .touchUpInside)
     }
     
     init(Today : Today){
         self.today = Today
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(feature : Feature){
+        self.feature = feature
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    init(rankingFeature : RankingFeature){
+        self.rankingFeature = rankingFeature
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -100,10 +113,28 @@ private extension DetailVC {
             $0.height.equalTo(32)
         }
         
-        guard let imgUrl = URL(string: self.today.imageURL) else {return}
-        self.appIcon.kf.setImage(with: imgUrl)
-        self.mainTitle.text = self.today.title
-        self.subTitle.text = self.today.subTitle
+        if let today = self.today{
+            self.mainTitle.text = today.title
+            self.subTitle.text = today.subTitle
+        }
         
+        if let feature = self.feature{
+            self.mainTitle.text = feature.appName
+            self.subTitle.text = feature.description
+        }
+        
+        if let rankingFeature = self.rankingFeature{
+            self.mainTitle.text = rankingFeature.title
+            self.subTitle.text = rankingFeature.description
+        }
+        
+       
+    }
+    
+    @objc func shareBtnClick(_ sender:Any){
+        
+        let activityItems : [Any] = [today?.title ?? "", feature?.appName ?? "", rankingFeature?.title ?? ""]
+        let activityVC = UIActivityViewController(activityItems: activityItems, applicationActivities: nil)
+        self.present(activityVC, animated: true)
     }
 }
